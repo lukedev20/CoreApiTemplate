@@ -1,4 +1,4 @@
-﻿using CoreApiTemplate.Intergrations.Persistance;
+﻿using CoreApiTemplate.Integrations.Persistence;
 using CoreApiTemplate.Models;
 using MySqlConnector;
 

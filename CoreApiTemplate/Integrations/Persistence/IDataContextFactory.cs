@@ -1,4 +1,4 @@
-﻿namespace CoreApiTemplate.Intergrations.Persistance;
+﻿namespace CoreApiTemplate.Integrations.Persistence;
 
 public interface IDataContextFactory
 {

@@ -5,7 +5,7 @@ using CoreApiTemplate.Exceptions;
 using Dapper;
 using MySqlConnector;
 
-namespace CoreApiTemplate.Intergrations.Persistance;
+namespace CoreApiTemplate.Integrations.Persistence;
 
 public abstract class BaseSqlDataContext<T>(
     MySqlConnection context,

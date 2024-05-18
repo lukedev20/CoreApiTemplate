@@ -1,6 +1,6 @@
 ﻿using CoreApiTemplate.Exceptions;
 
-namespace CoreApiTemplate.Intergrations.Persistance;
+namespace CoreApiTemplate.Integrations.Persistence;
 
 public class DataContextFactory(IServiceProvider serviceProvider) : IDataContextFactory
 {

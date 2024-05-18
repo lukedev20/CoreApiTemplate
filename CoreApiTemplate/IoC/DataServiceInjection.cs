@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using CoreApiTemplate.Intergrations.Persistance;
+using CoreApiTemplate.Integrations.Persistence;
 using MySqlConnector;
 
 namespace CoreApiTemplate.IoC;
