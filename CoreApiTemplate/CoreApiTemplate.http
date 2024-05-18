@@ -1,0 +1,4 @@
+@CoreApiTemplate_HostAddress = http://localhost:5132
+
+GET {{CoreApiTemplate_HostAddress}}/Test/
+Accept: application/json
