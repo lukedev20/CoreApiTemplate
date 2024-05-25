@@ -18,6 +18,7 @@ public class DataServiceInjection
 
         foreach (var instance in instances)
         {
+            if(instance.Name == "GenericData`1") continue;
             var definition = instance.GetInterfaces().First(item =>
                 item.IsGenericType && item.GetGenericTypeDefinition() == typeof(IDataContext<>));
             serviceCollection.AddSingleton(definition, instance);
