@@ -11,7 +11,7 @@ There's a few limitations to be aware of:
 `BaseSqlDataContext` uses reflection to construct sql queries from classes and must data queries will end up using it so 
 keep that in mind.
 - Where data is to be persisted, there needs to be a model and a data class which is okay for the project's intended use 
-but may get cumbersome over time.
+but may get cumbersome over time but to get around this `SqlDataAttribute` can be used on the model class.
 - Alot of services are singleton given it's only ever going to be local development
 
 
@@ -36,10 +36,17 @@ implementations - Again this is really to save time and make creating a new mode
 `IDataContext<T>` to make creating a new model as easy as possible.
 
 ### Data classes
-A new model can be created by a new class implementing `IDataContext<T>` which defines most core interactions with persisting data.
+A new model can be created by two methods: 
+
+1) A new class implementing `IDataContext<T>` which defines most core interactions with persisting data.
 You can also inherit base contexts that implement most/all the methods for the data class to work. The reason i've not made
 it part of the interface is because i have an intention to not limit the persistence to sql services therefore the base 
 can be interchanged.
+
+2) Using `SqlDataAttribute` on the model for data structures that don't require any overrides for their implementation.
+This will create a generic class implementing `IDataContext<T>` for you to reduce the overhead further
+
+
 
 ## Future work
 Check out [the project page](https://github.com/lukedev20/CoreApiTemplate/projects). I can't make any promises on how long 
