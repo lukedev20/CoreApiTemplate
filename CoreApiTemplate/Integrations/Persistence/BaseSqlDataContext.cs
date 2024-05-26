@@ -242,69 +242,91 @@ public abstract class BaseSqlDataContext<T>(
 
     protected string CreateCondition(PropertyInfo? property, T item, string separator, bool includeKey = true)
     {
+        string NullCondition(string propertyName)
+        {
+            if (includeKey)
+            {
+                return $"{separator} {propertyName} = null";
+            }
+
+            return $"{separator}null";
+        }
+
         var type = Nullable.GetUnderlyingType(property!.PropertyType) ?? property.PropertyType;
         var propertyName = property.Name;
 
         if (type == typeof(int))
         {
-            var value = (int) property.GetValue(item)!;
+            var value = (int?) property.GetValue(item);
+
+            if(value == null) return NullCondition(propertyName);
 
             if (includeKey)
             {
-                return $"{separator} {propertyName} = {value!}";
+                return $"{separator} {propertyName} = {value}";
             }
 
-            return $"{separator}{value!}";
+            return $"{separator}{value}";
         }
         if (type == typeof(string))
         {
             var value = (string?) property.GetValue(item);
 
+            if(value == null) return NullCondition(propertyName);
+
             if (includeKey)
             {
-                return $"{separator} {propertyName} =  '{value!}'";
+                return $"{separator} {propertyName} =  '{value}'";
             }
-            return $"{separator}'{value!}'";
+            return $"{separator}'{value}'";
         }
         if (type == typeof(decimal))
         {
             var value = (decimal?) property.GetValue(item);
 
+            if(value == null) return NullCondition(propertyName);
+
             if (includeKey)
             {
-                return $"{separator} {propertyName} =  {value!}";
+                return $"{separator} {propertyName} =  {value}";
             }
-            return $"{separator}{value!}";
+            return $"{separator}{value}";
         }
         if (type == typeof(double))
         {
             var value = (double?) property.GetValue(item);
 
-            if (includeKey)
-            {
-                return $"{separator} {propertyName} =  {value!}";
-            }
-            return $"{separator}{value!}";
-        }
-        if (type == typeof(DateTime))
-        {
-            var value = (DateTime) property.GetValue(item)!;
+            if(value == null) return NullCondition(propertyName);
 
             if (includeKey)
             {
-                return $"{separator} {propertyName} =  '{value.ToString("yyyy-MM-dd HH:mm:ss")}'";
+                return $"{separator} {propertyName} =  {value}";
             }
-            return $"{separator}'{value.ToString("yyyy-MM-dd HH:mm:ss")}'";
+            return $"{separator}{value}";
+        }
+        if (type == typeof(DateTime))
+        {
+            var value = (DateTime?) property.GetValue(item);
+
+            if(value == null) return NullCondition(propertyName);
+
+            if (includeKey)
+            {
+                return $"{separator} {propertyName} =  '{((DateTime)value).ToString("yyyy-MM-dd HH:mm:ss")}'";
+            }
+            return $"{separator}'{((DateTime)value).ToString("yyyy-MM-dd HH:mm:ss")}'";
         }
         else
         {
             var value = (string?) property.GetValue(item);
 
+            if(value == null) return NullCondition(propertyName);
+
             if (includeKey)
             {
-                return $"{separator} {propertyName} =  '{value!}'";
+                return $"{separator} {propertyName} =  '{value}'";
             }
-            return $"{separator}'{value!}'";
+            return $"{separator}'{value}'";
         }
     }
 
